@@ -16,7 +16,7 @@ import tensorflow as tf
 learning_rate = 0.001
 batch_size = 100
 display_step = 1
-model_path = "/home/devuser/workdir/model.ckpt"
+model_path = "model.ckpt"
 
 # Network Parameters
 n_hidden_1 = 256 # 1st layer number of features
