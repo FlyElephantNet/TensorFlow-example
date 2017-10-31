@@ -22,7 +22,7 @@ mdl2= load_model('cifarus10.h5')
 
 import numpy as np
 from PIL import Image
-filename= 'cat1.jpg'
+filename= 'img/1.jpg'
 img = Image.open( filename )
 try:
     data = np.asarray( img, dtype='float32' )
