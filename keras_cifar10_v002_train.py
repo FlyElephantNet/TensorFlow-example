@@ -58,7 +58,7 @@ print(X_test.shape[0], 'test samples')
 batch_size = 128
 nb_classes = 10
 llrate= 3e-5
-nb_epoch = 50
+nb_epoch = 200
 regul= 1e-6
 Y_train = np_utils.to_categorical(y_train, nb_classes)
 Y_test = np_utils.to_categorical(y_test, nb_classes)
