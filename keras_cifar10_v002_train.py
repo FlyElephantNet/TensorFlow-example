@@ -13,9 +13,12 @@ from keras.optimizers import SGD, Adam, RMSprop
 from keras.utils import np_utils
 from keras.callbacks import TensorBoard
 import keras
+import os
 
 tensorboard = TensorBoard(log_dir='./logs', histogram_freq=0,
                           write_graph=True, write_images=True)
+
+os.system('tensorboard --logdir ./logs &')
 
 # the data, shuffled and split between tran and test sets
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
@@ -62,7 +65,7 @@ model.add(Activation('softmax'))
 rms= keras.optimizers.rmsprop(lr=llrate, decay=regul)
 adm= keras.optimizers.Adam(lr=llrate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=regul)
 model.compile(loss='mean_squared_error', optimizer=adm)
-model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch,  verbose=2, validation_data=(X_test, Y_test))
+model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch,  verbose=2, validation_data=(X_test, Y_test), callbacks=[tensorboard])
 score = model.evaluate(X_test, Y_test, verbose=1)
 print('Test score:', score)
 
