@@ -21,9 +21,6 @@ tensorboard = TensorBoard(log_dir='./logs', histogram_freq=0,
 
 os.system('tensorboard --logdir ./logs &')
 
-parallel_model = multi_gpu_model(model, gpus=8)
-
-
 # the data, shuffled and split between tran and test sets
 (X_train, y_train), (X_test, y_test) = cifar10.load_data()
 
@@ -69,6 +66,7 @@ model.add(Activation('softmax'))
 rms= keras.optimizers.rmsprop(lr=llrate, decay=regul)
 adm= keras.optimizers.Adam(lr=llrate, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=regul)
 #model.compile(loss='mean_squared_error', optimizer=adm)
+parallel_model = multi_gpu_model(model, gpus=8)
 parallel_model.compile(loss='categorical_crossentropy', optimizer=adm)
 parallel_model.fit(X_train, Y_train, batch_size=batch_size, nb_epoch=nb_epoch, verbose=2, validation_data=(X_test, Y_test), callbacks=[tensorboard])
 score = model.evaluate(X_test, Y_test, verbose=1)
