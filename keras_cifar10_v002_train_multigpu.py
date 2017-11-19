@@ -21,11 +21,6 @@ tensorboard = TensorBoard(log_dir='./logs', histogram_freq=0,
 
 os.system('tensorboard --logdir ./logs &')
 
-with tf.device('/cpu:0'):
-    model = Xception(weights=None,
-                     input_shape=(height, width, 3),
-                     classes=num_classes)
-
 parallel_model = multi_gpu_model(model, gpus=8)
 
 
